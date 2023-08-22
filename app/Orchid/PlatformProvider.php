@@ -33,6 +33,10 @@ class PlatformProvider extends OrchidServiceProvider
                 ->icon('task')
                 ->route('platform.subscribers')
                 ->title('Subscribers'),
+            Menu::make('News Letter')
+                ->icon('task')
+                ->route('platform.newsletter')
+                ->title('News_Letter'),
 
             Menu::make(__('Users'))
                 ->icon('user')
