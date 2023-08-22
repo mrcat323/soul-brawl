@@ -19,3 +19,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('subscribers' , [\App\Http\Controllers\SubscribersController::class , 'index']);
+Route::post('newsletter' , [\App\Http\Controllers\NewsLetterController::class , 'store']);
