@@ -47,10 +47,10 @@ class AuthController extends Controller
     {
         $credentials = $request->only(['email', 'password']);
         $user = User::where('email', $credentials['email'])->first();
-        if (!$user->email_verified_at || !$token = auth('api')->attempt($credentials)){
+        if (!$token = auth('api')->attempt($credentials)){
             return response()->json(['error'=> 'Unauthorized'], 401);
         }
-        return $this->respondWithToken($token);
+        return response()->json($token);
     }
 
     public function user()
@@ -71,3 +71,4 @@ class AuthController extends Controller
         ]);
     }
 }
+
