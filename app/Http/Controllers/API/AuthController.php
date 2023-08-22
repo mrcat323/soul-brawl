@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
@@ -32,7 +33,7 @@ class AuthController extends Controller
             User::create([
                 'name' => $request->name,
                 'email' => $request->email,
-                'password' => $request->password,
+                'password' => Hash::make($request->password),
                 'email_username' => $request->email_username,
                 'email_password' => $request->email_password,
                 'email_provider' => $request->email_provider
