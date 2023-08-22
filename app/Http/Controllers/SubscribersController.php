@@ -12,4 +12,8 @@ class SubscribersController extends Controller
         $subs = Subscribers::all();
         return response()->json($subs);
     }
+    public function store(Request $request)
+    {
+        Subscribers::create($request->all());
+    }
 }
