@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,9 +15,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::prefix('auth')->middleware('api')->controller(AuthController::class)->group(function () {
+   Route::post('/register', 'register');
+    Route::post('/login', 'login')->name('login');
+    Route::get('/user', 'user');
+    Route::post('/logout', 'logout');
 });
-
 Route::get('subscribers' , [\App\Http\Controllers\SubscribersController::class , 'index']);
 Route::post('newsletter' , [\App\Http\Controllers\NewsLetterController::class , 'store']);
