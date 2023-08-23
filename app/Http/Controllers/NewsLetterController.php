@@ -12,14 +12,21 @@ class NewsLetterController extends Controller
 {
     public function store(Request $request)
     {
+        $validatedData = $request->validate([
+            'title' => 'required|max:255',
+            'content' => 'required',
+        ]);
+
         $news = $request->all();
-        ///return $news;
+
         $subs = Subscribers::where('status', 1)->get();
+
         foreach ($subs as $sub) {
-            dispatch(New SendNewsletter($sub->email, $news));
+            dispatch(new SendNewsletter($sub->email, $news));
         }
+
         return response()->json([
             'msg' => 'SUCCESS',
         ]);
-    }
+    }   
 }

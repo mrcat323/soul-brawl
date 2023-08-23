@@ -21,6 +21,6 @@ Route::prefix('auth')->middleware('api')->controller(AuthController::class)->gro
     Route::get('/user', 'user');
     Route::post('/logout', 'logout');
 });
-Route::get('subscribers' , [\App\Http\Controllers\SubscribersController::class , 'index']);
-Route::post('subscriber-add' , [\App\Http\Controllers\SubscribersController::class , 'store']);
+Route::get('subscribers' , [\App\Http\Controllers\SubscribersController::class , 'index'])->middleware('auth:api');
+Route::post('subscriber-add' , [\App\Http\Controllers\SubscribersController::class , 'store'])->middleware('auth:api');
 Route::post('newsletter' , [\App\Http\Controllers\NewsLetterController::class , 'store']);

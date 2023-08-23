@@ -10,5 +10,10 @@ class Subscribers extends Model
 {
     use HasFactory, AsSource;
 
-    protected $fillable = ['email', 'email_verified', 'status'];
+    protected $fillable = ['email','user_id'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
