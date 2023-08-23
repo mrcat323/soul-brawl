@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Jobs\SendNewsletter;
 use App\Models\Subscribers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class NewsLetterController extends Controller

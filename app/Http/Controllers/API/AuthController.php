@@ -24,9 +24,9 @@ class AuthController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:4|max:32',
-            'email_username' => 'required',
-            'email_password' => 'required|min:4|max:32',
-            'email_provider' => 'required'
+//            'email_username' => 'required',
+//            'email_password' => 'required|min:4|max:32',
+//            'email_provider' => 'required'
         ]);
 
         if ($validate->passes()) {
