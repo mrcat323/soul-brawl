@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\SubscribersController;
+use App\Http\Controllers\NewsLetterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,12 +17,11 @@ use App\Http\Controllers\API\AuthController;
 |
 */
 Route::post('/login', [AuthController::class,'login'])->name('login');
+Route::post('/register', [AuthController::class, 'register']);
 
-Route::prefix('auth')->middleware('api')->controller(AuthController::class)->group(function () {
-   Route::post('/register', 'register');
-    Route::get('/user', 'user');
-    Route::post('/logout', 'logout');
+Route::middleware('auth:api', function () {
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::get('subscribers', [SubscribersController::class , 'index']);
+    Route::post('subscriber-add', [SubscribersController::class, 'store']);
+    Route::post('newsletter', [NewsLetterController::class, 'store']);
 });
-Route::get('subscribers' , [\App\Http\Controllers\SubscribersController::class , 'index'])->middleware('auth:api');
-Route::post('subscriber-add' , [\App\Http\Controllers\SubscribersController::class , 'store'])->middleware('auth:api');
-Route::post('newsletter' , [\App\Http\Controllers\NewsLetterController::class , 'store']);
