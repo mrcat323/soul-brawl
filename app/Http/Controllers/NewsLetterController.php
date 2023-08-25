@@ -19,7 +19,7 @@ class NewsLetterController extends Controller
 
         $news = $request->all();
 
-        $subs = Subscribers::where('status', 1)->get();
+        $subs = Subscribers::get();
 
         foreach ($subs as $sub) {
             dispatch(new SendNewsletter($sub->email, $news));
@@ -28,5 +28,5 @@ class NewsLetterController extends Controller
         return response()->json([
             'msg' => 'SUCCESS',
         ]);
-    }   
+    }
 }
