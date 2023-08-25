@@ -7,20 +7,21 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\AuthRequest;
 
 class AuthController extends Controller
 {
-    public function register(Request $request)
+    public function register(AuthRequest $request)
     {
 
-        $validate = Validator::make($request->all(), [
+        /*$validate = Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:4|max:32',
-        ]);
+        ]);*/
 
-        if (!$validate->passes()) {
-            return response()->json($validate->messages(), 400);
+        if (!$request->validated()) {
+            return response()->json($request->messages(), 400);
         }
 
         User::create([
