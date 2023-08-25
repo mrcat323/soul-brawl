@@ -10,8 +10,9 @@ class SubscribersController extends Controller
 {
     public function index()
     {
-        $subs = Subscribers::all();
-        return response()->json($subs);
+        $user = auth('api')->user();
+        $subscribers = $user->subscribers()->with('user')->get();
+        return response()->json($subscribers);
     }
     public function store(Request $request)
     {
